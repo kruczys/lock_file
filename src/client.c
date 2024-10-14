@@ -1,17 +1,8 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include "lib.c"
 
-void write_to_file() {
-    return;
-}
-
-int read_user_input() {
-    int number;
-    scanf("%d", &number);
-    return number;
-}
 
 int main() {
     int fd = open("buffer", O_RDWR|O_APPEND|O_CREAT, 0666);
