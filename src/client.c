@@ -1,7 +1,14 @@
 #include <stdio.h>
+#include <stdlib.h>
+
+int read_user_input() {
+  int number;
+  scanf("%d", &number);
+  return number;
+}
 
 int main() {
-    return 0;
+  exit(0);
 }
 
 // 1. Sprawdz czy plik istnieje, jesli nie to utworz, jesli tak to nadpisz
