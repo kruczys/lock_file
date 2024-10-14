@@ -17,7 +17,6 @@ int main() {
   int fd = open("buffer", O_RDWR|O_APPEND|O_CREAT, 0666);
   int input = read_user_input();
 
-  printf("%d", input + 100);
   write(fd, &input, sizeof(input));
   write(fd, "\n", 1);
 
