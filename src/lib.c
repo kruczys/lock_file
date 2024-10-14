@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <unistd.h>
 
-void write_last_line(int fd, int* number) {
+void write_last_line(int* fd, int* number) {
     char buffer[20];
     int length = snprintf(buffer, sizeof(buffer), "%d\n",*number);
-    write(fd, buffer, length);
+    write(*fd, buffer, length);
 }
 
-int read_last_line(int fd) {
-    return fd;
+int read_last_line(int* fd) {
+    return *fd;
 }
 
 int read_user_input() {
