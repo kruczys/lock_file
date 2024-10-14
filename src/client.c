@@ -8,8 +8,6 @@ int main() {
     int fd = open("buffer", O_RDWR|O_APPEND|O_CREAT, 0666);
     int input = read_user_input();
 
-    write_last_line(fd, &input);
-
     close(fd);
     exit(0);
 }
