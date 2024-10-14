@@ -1,7 +1,11 @@
 #include <stdio.h>
 
-void write_to_file() {
+void write_last_line() {
     return;
+}
+
+int read_last_line() {
+    return 1;
 }
 
 int read_user_input() {
