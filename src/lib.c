@@ -1,5 +1,8 @@
+#include <sys/types.h>
+#include <unistd.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 void write_last_line(int* fd, int* number) {
     char buffer[20];
@@ -8,7 +11,14 @@ void write_last_line(int* fd, int* number) {
 }
 
 int read_last_line(int* fd) {
-    return *fd;
+    char buffer[20];
+    int number;
+    
+    lseek(*fd, sizeof(number), SEEK_END);
+    read(*fd, buffer, sizeof(number));
+    number = atoi(buffer);
+
+    return number;
 }
 
 int read_user_input() {
