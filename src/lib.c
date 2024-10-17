@@ -27,12 +27,10 @@ int read_user_input() {
     return number;
 }
 
-int take_file(char* path) {
-    int fd;
-
-    return fd;
+int take_file(int* fd) {
+    return *fd;
 }
 
 void give_file() {
-    ;;;;;;;;;;;;;;;
+    return;
 }
