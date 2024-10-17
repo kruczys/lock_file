@@ -16,3 +16,13 @@ int read_user_input() {
     scanf("%d", &number);
     return number;
 }
+
+int take_file(char* path) {
+    int fd;
+
+    return fd;
+}
+
+void give_file() {
+    ;;;;;;;;;;;;;;;
+}
