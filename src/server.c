@@ -7,13 +7,14 @@ int do_calculations(int x) {
 int main() {
     int fd_data = open_data_file();
     int fd_results = open_result_file();
-    
+    int data_size_before = get_file_size(&fd_data);
+
     while (1) {
-        int data_size_before = get_file_size(&fd_data);
         if (file_changed(&fd_data, &data_size_before)) {
             int number = read_last_line(&fd_data);
             number = do_calculations(number);
             write_last_line(&fd_results, &number); 
+            data_size_before = get_file_size(&fd_data);
         }
     }
 }

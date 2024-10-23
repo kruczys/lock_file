@@ -1,16 +1,24 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/stat.h>
 
 void write_last_line(int* fd, int* number) {
     char buffer[20];
-    int length = snprintf(buffer, sizeof(buffer), "%d",*number);
+    int length = snprintf(buffer, sizeof(buffer), "%d\n",*number);
     write(*fd, buffer, length);
 }
 
 int read_last_line(int* fd) {
-    return 1;
+    char buffer[20];
+    int number;
+
+    lseek(*fd, sizeof(number), SEEK_END);
+    read(*fd, buffer, sizeof(number));
+    number = atoi(buffer);
+
+    return number;
 }
 
 int read_user_input() {
@@ -20,12 +28,12 @@ int read_user_input() {
 }
 
 int open_data_file() {
-    int fd = open("dane", O_RDWR|O_APPEND|O_CREAT, 0666);
+    int fd = open("./dane", O_RDWR|O_APPEND|O_CREAT, 0666);
     return fd;
 }
 
 int open_result_file() {
-    int fd = open("wyniki", O_RDWR|O_APPEND|O_CREAT, 0666);
+    int fd = open("./wyniki", O_RDWR|O_APPEND|O_CREAT, 0666);
     return fd;
 }
 
