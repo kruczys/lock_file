@@ -4,7 +4,7 @@
 void test_write(int fd) {
     int number = 2137;
     for (int i = 0; i < 10; i++) {
-       write_last_line(fd, &number);
+       write_last_line(&fd, &number);
     }
 }
 

@@ -1,12 +1,10 @@
-int main()
-{
-    return 0;
+#include <stdio.h>
+
+int do_calculations(int x) {
+    return 3*x*x*x + 11*x*x - 3*x + 103;
 }
 
-// 1. Czekaj az plik bedzie wolny
-// 2. zajmij plik
-// 3. przeczytaj ostatnia linie
-// 4. wykonaj obliczenia
-// 5. dopisz wynik do pliku
-// 6. zwolnij plik
-// 7. wroc do 1 dopoki uzytkownik nie wyjdzie
+int main() {
+    int number = 3;
+    printf("%d\n", do_calculations(number));
+}

@@ -1,3 +1,7 @@
 build/
 buffer
 test_file
+.idea/
+comms_file
+dane
+wyniki
