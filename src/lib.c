@@ -1,24 +1,16 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <sys/stat.h>
 
 void write_last_line(int* fd, int* number) {
     char buffer[20];
-    int length = snprintf(buffer, sizeof(buffer), "%d\n",*number);
+    int length = snprintf(buffer, sizeof(buffer), "%d",*number);
     write(*fd, buffer, length);
 }
 
 int read_last_line(int* fd) {
-    char buffer[20];
-    int number;
-
-    lseek(*fd, sizeof(number), SEEK_END);
-    read(*fd, buffer, sizeof(number));
-    number = atoi(buffer);
-
-    return number;
+    return 1;
 }
 
 int read_user_input() {

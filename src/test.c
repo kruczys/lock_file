@@ -1,15 +1,11 @@
-#include <fcntl.h>
 #include "lib.c"
 
-void test_write(int fd) {
-    int number = 2137;
-    for (int i = 0; i < 10; i++) {
-       write_last_line(&fd, &number);
-    }
-}
-
 int main() {
-    int fd = open("test_file", O_RDWR|O_APPEND|O_CREAT, 0666);
-    test_write(fd);
-    close(fd);
+    int fd = open_data_file();
+    int fd_w = open_result_file();
+    int number = read_user_input();
+    write_last_line(&fd, &number);
+    write_last_line(&fd_w, &number);
+    printf("%d\n", read_last_line(&fd));
+    printf("%d\n", read_last_line(&fd_w));
 }

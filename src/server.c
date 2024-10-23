@@ -1,10 +1,19 @@
-#include <stdio.h>
+#include "lib.c"
 
 int do_calculations(int x) {
     return 3*x*x*x + 11*x*x - 3*x + 103;
 }
 
 int main() {
-    int number = 3;
-    printf("%d\n", do_calculations(number));
+    int fd_data = open_data_file();
+    int fd_results = open_result_file();
+    
+    while (1) {
+        int data_size_before = get_file_size(&fd_data);
+        if (file_changed(&fd_data, &data_size_before)) {
+            int number = read_last_line(&fd_data);
+            number = do_calculations(number);
+            write_last_line(&fd_results, &number); 
+        }
+    }
 }

@@ -1,5 +1,3 @@
-#include <fcntl.h>
-#include <unistd.h>
 #include "lib.c"
 
 
@@ -12,6 +10,6 @@ int main() {
     
     if (file_changed(&fd_results, &results_size_before))
         printf("%d", read_last_line(&fd_results));
-
+    
     exit(0);
 }
