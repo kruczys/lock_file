@@ -1,26 +1,45 @@
 #include <fcntl.h>
-#include "lib.c"
+#include <string.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+#define BUFFER_SIZE 256
 
 int do_calculations(int x) {
     return 3*x*x*x + 11*x*x - 3*x + 103;
 }
 
 int main() {
-    int fd_data;
-    int result;
-    int fd_results;
+    int fd_data, fd_results;
+    char buffer[BUFFER_SIZE];
+    ssize_t bytes_read;
+    int number;
+
+    fd_results = open("./wyniki", O_WRONLY | O_CREAT, 0666);
+    close(fd_results);
+
+    printf("Serwer ruszył... czeka na klienta...");
 
     while (1) {
-        sleep(1);
-        printf("Otweram plik dane");
         while ((fd_data = open("./dane", O_RDONLY) == -1)) {
             sleep(1);
         }
-        result = do_calculations(read_last_line(fd_data));
+
+        bytes_read = read(fd_data, buffer, BUFFER_SIZE);
         close(fd_data);
-        printf("Zamknalem plik");
-        fd_results = open("./wyniki", O_RDWR | O_TRUNC | O_CREAT, 0666);
-        write_last_line(fd_results, result);
-        close(fd_results);
+
+        if (bytes_read > 0) {
+            buffer[bytes_read] = '\0';
+            number = atoi(buffer);
+            number = do_calculations(number);
+            snprintf(buffer, BUFFER_SIZE, "%d", number);
+
+            fd_results = open("./wyniki", O_WRONLY|O_TRUNC);
+            write(fd_results, buffer, strlen(buffer));
+            close(fd_results);
+        }
     }
+
+    return 0;
 }
