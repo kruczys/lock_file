@@ -1,3 +1,4 @@
+#include <fcntl.h>
 #include "lib.c"
 
 int do_calculations(int x) {
@@ -5,16 +6,21 @@ int do_calculations(int x) {
 }
 
 int main() {
-    int fd_data = open_data_file();
-    int fd_results = open_result_file();
-    int data_size_before = get_file_size(&fd_data);
+    int fd_data;
+    int result;
+    int fd_results;
 
     while (1) {
-        if (file_changed(&fd_data, &data_size_before)) {
-            int number = read_last_line(&fd_data);
-            number = do_calculations(number);
-            write_last_line(&fd_results, &number); 
-            data_size_before = get_file_size(&fd_data);
+        sleep(1);
+        printf("Otweram plik dane");
+        while ((fd_data = open("./dane", O_RDONLY) == -1)) {
+            sleep(1);
         }
+        result = do_calculations(read_last_line(fd_data));
+        close(fd_data);
+        printf("Zamknalem plik");
+        fd_results = open("./wyniki", O_RDWR | O_TRUNC | O_CREAT, 0666);
+        write_last_line(fd_results, result);
+        close(fd_results);
     }
 }
